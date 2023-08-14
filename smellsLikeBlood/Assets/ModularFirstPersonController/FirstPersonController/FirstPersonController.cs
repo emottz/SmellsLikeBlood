@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 #if UNITY_EDITOR
     using UnityEditor;
@@ -16,9 +17,17 @@ using UnityEngine.UI;
 
 public class FirstPersonController : MonoBehaviour
 {
+
+    
+
+
     private Rigidbody rb;
 
     #region Camera Movement Variables
+
+
+    public int i;
+    
 
     public Camera playerCamera;
 
@@ -152,7 +161,7 @@ public class FirstPersonController : MonoBehaviour
     void Start()
     {
 
-
+        kurtul();
 
         if(lockCursor)
         {
@@ -205,10 +214,14 @@ public class FirstPersonController : MonoBehaviour
 
     private void Update()
     {
+
+
+
         #region Camera
 
+        
         // Control camera movement
-        if(cameraCanMove)
+        if (cameraCanMove)
         {
             yaw = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * mouseSensitivity;
 
@@ -529,7 +542,36 @@ public class FirstPersonController : MonoBehaviour
             joint.localPosition = new Vector3(Mathf.Lerp(joint.localPosition.x, jointOriginalPos.x, Time.deltaTime * bobSpeed), Mathf.Lerp(joint.localPosition.y, jointOriginalPos.y, Time.deltaTime * bobSpeed), Mathf.Lerp(joint.localPosition.z, jointOriginalPos.z, Time.deltaTime * bobSpeed));
         }
     }
+
+    public void kurtul()
+    {
+        while(i < 6)
+        {
+
+            if (i == 0 || i % 2 == 0)
+            {
+                if (Input.GetKeyDown(KeyCode.A))
+                {
+                    i++;
+                }
+                
+            }
+            else if (i == 0 || i % 2 != 0)
+            {
+                if (Input.GetKeyDown(KeyCode.D))
+                {
+                    i++;
+                }
+            }
+
+        }
+
+        Debug.Log("kutulduun;");
+
+    }
 }
+
+ 
 
 
 
